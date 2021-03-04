@@ -18,7 +18,7 @@ from F4 import Fitting
 
 DataFile1 = 'Data//OPEn_Positive_volts.txt'   # This is Ea for OPEn, n=1,2,3. it has a voltage range {0.2,1.0)    
 DataFile2 = 'Data//OPEn_Negative_volts.txt'   # This is Ea for OPEn, n=1,2,3. it has a voltage range {-1.0,-0.2)  
-data = pd.read_csv(DataFile1, delimiter = '\t',header=None)  
+data = pd.read_csv(DataFile2, delimiter = '\t',header=None)  
 data1 = data[abs(data[0])>0] 
 c=data1.dropna()
  
@@ -26,27 +26,33 @@ c=data1.dropna()
 x=c[0] # this column is the voltage 
 y1,y2,y3=(c[1],c[2],c[3])  # These columns are Ea for OPE1,OPE2,OP3 respectively 
 
+#plt.scatter(x,y2)
+#plt.show() 
+
 ipar = {
    
     
-        'E'   :	1.05e-01,	
-	'l'   :	1.068e-01,	
-	'cap' :	8.33e-02,	
-	'W'   :	8.158e-02,	
-	'A'   :	-7e-01 
+        'E'   :	0.75,	
+	'l'   :	1.2,	
+	'cap' :	1.31e-19,	
+	'W'   :	0.83,	
+	'A'   :	0.26 
+	
+	
+	
     }   
 
 
 bnds = {
-    'E'     : [-1,1],
-    'l'     : [-1,1],
+    'E'     : [0,1],
+    'l'     : [0,1],
     'cap'   : [0,1],
     'W'     : [0,1],
-    'A'     : [-1,1] 
+    'A'     : [0,1] 
       } 
  
  
-cols=[1,2,3] 
+cols=[2]  
 
 
 for col in cols: 
@@ -68,12 +74,11 @@ for col in cols:
     plt.plot(Obj.modelD['X'],Obj.modelD['Y'],color='red',label=col)
     plt.xlabel("voltage(V)") 
     plt.ylabel("E_a")   
-    plt.title("Activation Energy for OPE1")
-    plt.savefig("Ea_OPE1.png")    
+    plt.title("Activation Energy for OPE2")
+    plt.savefig("Ea_OPE2.png")    
 plt.legend() 
 plt.show()
-
-
+  
 
 
 
